@@ -1,0 +1,10 @@
+*
+!target/*-runner
+!target/*-runner.jar
+!target/lib/*
+!target/quarkus-app/*
+$RECYCLE.BIN
+**/node_modules
+**/target/tmp
+.DS_Store
+*.log

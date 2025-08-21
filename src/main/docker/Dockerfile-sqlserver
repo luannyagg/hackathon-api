@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/mssql/server:2017-latest
+
+ENV SA_PASSWORD=Password23
+ENV ACCEPT_EULA=Y
+
+# Copia o script para dentro da imagem
+COPY init.sql /init.sql
+
+# Cria um entrypoint para iniciar o SQL Server e executar o script de inicialização
+CMD /bin/bash -c "/opt/mssql/bin/sqlservr & \
+   echo 'Aguardando SQL Server iniciar...' && sleep 20 && \
+   /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -i /init.sql && \
+   wait"
