@@ -1,7 +1,7 @@
 package org.caixa.controller;
 
-import io.quarkus.hibernate.orm.panache.PanacheQuery;
-import io.quarkus.panache.common.Page;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -32,7 +32,7 @@ public class SimulacaoController {
     SimulacaoRepository repository;
 
     @POST
-    public Response criar(SolicitarSimulacaoDTO req){
+    public Response criar(SolicitarSimulacaoDTO req) throws JsonProcessingException {
         EnvelopeSimulacaoDTO out = service.simularESalvar(req);
         return Response.status(Response.Status.CREATED).entity(out).build();
     }

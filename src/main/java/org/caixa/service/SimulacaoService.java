@@ -1,11 +1,11 @@
 package org.caixa.service;
 
-import io.quarkus.hibernate.orm.panache.Panache;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.transaction.Transactional;
 import org.caixa.dto.EnvelopeSimulacaoDTO;
 import org.caixa.dto.ResultadoTipoDTO;
@@ -31,9 +31,12 @@ public class SimulacaoService {
     @Inject
     SimulacaoRepository simulacaoRepo;
 
+    @Inject
+    EventHubPublisher publisher;
+
 
     @Transactional
-    public EnvelopeSimulacaoDTO simularESalvar(SolicitarSimulacaoDTO req) {
+    public EnvelopeSimulacaoDTO simularESalvar(SolicitarSimulacaoDTO req) throws JsonProcessingException {
         BigDecimal valor = req.valorDesejado();
         int prazo = req.prazo();
 
@@ -97,9 +100,9 @@ public class SimulacaoService {
                 )
         );
 
-        // Serializa para JSON (você pode usar Jackson ou Quarkus JSON-B)
-//        String json = JsonbBuilder.create().toJson(envelope);
-//        publisher.publish(json);  // envia para o Event Hub
+        String payload = new ObjectMapper().writeValueAsString(envelope);
+        publisher.enviarEvento(payload);
+
 
         return envelope;
 
