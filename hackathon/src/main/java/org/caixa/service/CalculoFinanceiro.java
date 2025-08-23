@@ -1,6 +1,7 @@
 package org.caixa.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.apache.camel.quarkus.core.CamelConfig;
 import org.caixa.dto.ParcelaDTO;
 
 import java.math.BigDecimal;

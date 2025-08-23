@@ -35,17 +35,12 @@ public class MetricsFilter implements ContainerRequestFilter, ContainerResponseF
         String path = containerRequestContext.getUriInfo().getPath();
         String method = containerRequestContext.getMethod();
 
-        Object startObj = containerRequestContext.getProperty(START_NS);
-        if (startObj instanceof Long start) { // só continua se start existir
-            long elapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
-            boolean success = containerResponseContext.getStatus() < 500;
+        long start = (long) containerRequestContext.getProperty(START_NS);
+        long elapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);
+        boolean success = containerResponseContext.getStatus() < 500;
 
-            meterRegistry.timer(TIMER_PREFIX, "endpoint", path, "method", method).record(elapsedMs, TimeUnit.MILLISECONDS);
-            meterRegistry.counter(COUNT_PREFIX, "endpoint", path, "method", method).increment();
-            meterRegistry.counter(SUCCESS_PREFIX, "endpoint", path, "method", method, "success", String.valueOf(success)).increment();
-        } else {
-            System.out.println("start-ns não definido para esta requisição: " + path);
-        }
+        meterRegistry.timer(TIMER_PREFIX, "endpoint", path, "method", method).record(elapsedMs, TimeUnit.MILLISECONDS);
+        meterRegistry.counter(COUNT_PREFIX, "endpoint", path, "method", method).increment();
+        meterRegistry.counter(SUCCESS_PREFIX, "endpoint", path, "method", method, "success", String.valueOf(success)).increment();
     }
 }
-

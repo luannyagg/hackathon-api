@@ -55,14 +55,14 @@ If you want to learn more about building native executables, please consult <htt
 
 ## Related Guides
 
+- Micrometer Registry Prometheus ([guide](https://quarkus.io/guides/micrometer)): Enable Prometheus support for Micrometer
 - JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
 - Hibernate Validator ([guide](https://quarkus.io/guides/validation)): Validate object properties (field, getter) and method parameters for your beans (REST, CDI, Jakarta Persistence)
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- Camel AWS 2 Identity and Access Management (IAM) ([guide](https://camel.apache.org/camel-quarkus/latest/reference/extensions/aws2-iam.html)): Manage AWS IAM instances
+- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
 - Messaging - Kafka Connector ([guide](https://quarkus.io/guides/kafka-getting-started)): Connect to Kafka with Reactive Messaging
 - Camel Azure Event Hubs ([guide](https://camel.apache.org/camel-quarkus/latest/reference/extensions/azure-eventhubs.html)): The azure-eventhubs component that integrates Azure Event Hubs using AMQP protocol. Azure EventHubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- SmallRye Health ([guide](https://quarkus.io/guides/smallrye-health)): Monitor service health
+- Quarkus Support Azure Event Hubs ([guide](https://docs.quarkiverse.io/quarkus-azure-services/dev/quarkus-azure-eventhubs.html)): Interacts with Azure Event Hubs through the Azure SDK for Java
 - Micrometer metrics ([guide](https://quarkus.io/guides/micrometer)): Instrument the runtime and your application with dimensional metrics using Micrometer.
 
 ## Provided Code
@@ -83,8 +83,8 @@ Use Quarkus Messaging
 [Related Apache Kafka guide section...](https://quarkus.io/guides/kafka-reactive-getting-started)
 
 
-### SmallRye Health
+### REST
 
-Monitor your application's health using SmallRye Health
+Easily start your REST Web Services
 
-[Related guide section...](https://quarkus.io/guides/smallrye-health)
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

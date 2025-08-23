@@ -1,39 +1,41 @@
 package org.caixa.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "SIMULACAO")
 public class Simulacao extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_SIMULACAO")
-    public Integer id;
+    @Column(name = "ID_SIMULACAO", nullable = false, unique = true)
+    public Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "CO_PRODUTO")
-    public Produto produto;
+    @Column(name = "CO_PRODUTO", nullable = false)
+    public Integer codigoProduto;
 
-    @Column(name = "VR_SOLICITADO", nullable = false, precision = 18, scale = 2)
-    public BigDecimal valorSolicitado;
+    @Column(name = "NO_PRODUTO", nullable = false, length = 200)
+    public String nomeProduto;
 
-    @Column(name = "NUM_MESES", nullable = false)
-    public Integer prazoMeses;
+    @Column(name = "PC_TAXA_JUROS", nullable = false, precision = 10, scale = 9)
+    public BigDecimal taxaJuros;
 
-    @Column(name = "PC_TAXA_JU", nullable = false, precision = 10, scale = 9)
-    public BigDecimal taxaJurosAplicada;
+    @Column(name = "VALOR_DESEJADO", nullable = false, precision = 18, scale = 2)
+    public BigDecimal valorDesejado;
 
-    @Column(name = "DATA_CRIACAO", nullable = false)
-    public OffsetDateTime criadoEm;
+    @Column(name = "PRAZO", nullable = false)
+    public Integer prazo;
 
-    @OneToMany(mappedBy = "simulacao", cascade =CascadeType.ALL, orphanRemoval = true)
-    public List<Parcela> parcelas = new ArrayList<>();
+    @Column(name = "DATA_REFERENCIA", nullable = false)
+    public LocalDate dataReferencia;
+
+    @Column(name = "VALOR_TOTAL_PARCELAS", nullable = false, precision = 18, scale = 2)
+    public BigDecimal valorTotalParcelas;
 
 }

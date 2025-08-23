@@ -12,7 +12,6 @@ public class Parcela extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PARCELA")
     public Integer id;
 
     @ManyToOne(optional = false) @JoinColumn(name = "ID_SIMULACAO")
